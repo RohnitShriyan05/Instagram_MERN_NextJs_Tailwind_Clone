@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans&family=Grand+Hotel&family=Roboto:wght@300&display=swap');
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: 16px;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Fira Sans', sans-serif;
+  font-size: calc(1vmin + 0.8rem);
+}
+.logo{
+  font-family: 'Grand Hotel', cursive;
+}
+h1,.bigtext{
+  font-size: calc(2.5vmin + 0.8rem);
+}
+h2,.mediumtext{
+  font-size: calc(1vmin + 1rem);
+}
+.smalltext{
+  font-size: calc(0.8vmin + 0.8rem);
+}
+.vsmalltext{
+  font-size: calc(0.5vmin + 0.5rem);
+}
