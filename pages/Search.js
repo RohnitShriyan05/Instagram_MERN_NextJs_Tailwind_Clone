@@ -1,8 +1,6 @@
 
 export default function Search(){
     return(
-        <div className="bg-black h-full w-full">
-sadf
-        </div>
+        <div className="h-full w-full bg-black"></div>
     );
 }

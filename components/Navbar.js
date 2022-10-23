@@ -1,4 +1,5 @@
-import { BiHomeAlt, BiSearch, BiHeart } from "react-icons/bi";
+import { BiHomeAlt, BiSearch, BiHeart} from "react-icons/bi";
+import {RiAddCircleFill} from "react-icons/ri";
 import { useRouter } from "next/router";
 import Link from "next/link";
 export default function Navbar() {
@@ -8,21 +9,33 @@ export default function Navbar() {
       <li>
         <Link href="/">
           {router.asPath === "/" ? (
-            <BiHomeAlt className="mediumtext text-black cursor-pointer" />
+            <BiHomeAlt className="mediumtext text-black mr-10vw cursor-pointer" />
           ) : (
-            <BiHomeAlt className="mediumtext text-neutral-500 cursor-pointer hover:text-black" />
+            <BiHomeAlt className="mediumtext text-neutral-500 mr-10vw cursor-pointer hover:text-black" />
           )}
         </Link>
       </li>
+
       <li>
-        <Link href="/Search">
-          {router.asPath === "/Search" ? (
-            <BiSearch className="mediumtext text-black mx-10vw cursor-pointer" />
+        <Link href="/Explore">
+          {router.asPath === "/Explore" ? (
+            <BiSearch className="mediumtext text-black cursor-pointer mr-10vw" />
           ) : (
-            <BiSearch className="mediumtext text-neutral-500 mx-10vw cursor-pointer hover:text-black" />
+            <BiSearch className="mediumtext text-neutral-500  cursor-pointer mr-10vw hover:text-black" />
           )}
         </Link>
       </li>
+
+      <li>
+        <Link href="/CreatePost">
+          {router.asPath === "/CreatePost" ? (
+            <RiAddCircleFill className="mediumtext text-black mr-10vw cursor-pointer" />
+          ) : (
+            <RiAddCircleFill className="mediumtext text-neutral-500 mr-10vw cursor-pointer hover:text-black" />
+          )}
+        </Link>
+      </li>
+      
       <li>
         <Link href="/Notification">
           {router.asPath === "/Notification" ? (
