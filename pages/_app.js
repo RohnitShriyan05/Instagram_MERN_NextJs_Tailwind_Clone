@@ -6,12 +6,17 @@ import { useState } from 'react'
 function MyApp({ Component, pageProps }) {
   const [user, setUser] = useState();
   return(
-    <div className='flex flex-col h-screen w-full bg-white'>
-      <Header/>
+    <div>
       {
-        user? <Component {...pageProps} user={user}/> : <Login setUser={setUser}/>
-      }      
-      <Navbar/>
+        user?
+        <div className='flex flex-col h-screen w-full bg-white'>
+          <Header/>
+          <Component {...pageProps} user={user}/> : <Login setUser={setUser}/>     
+          <Navbar/>
+        </div>
+        :
+        <Login/>
+      }
     </div>
   )
 }

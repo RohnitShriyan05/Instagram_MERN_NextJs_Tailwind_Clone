@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 export default function Navbar() {
   const router = useRouter();
+
   return (
     <ul className="w-full flex items-center justify-center py-1vh border-t">
       <li>
