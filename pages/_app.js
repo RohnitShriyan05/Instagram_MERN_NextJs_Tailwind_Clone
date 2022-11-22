@@ -11,11 +11,11 @@ function MyApp({ Component, pageProps }) {
         user?
         <div className='flex flex-col h-screen w-full bg-white'>
           <Header/>
-          <Component {...pageProps} user={user}/> : <Login setUser={setUser}/>     
+          <Component {...pageProps} user={user}/>     
           <Navbar/>
         </div>
         :
-        <Login/>
+        <Login setUser={setUser}/>
       }
     </div>
   )

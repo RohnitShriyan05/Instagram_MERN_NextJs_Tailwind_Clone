@@ -9,7 +9,7 @@ export default function Profile({user}) {
     <div className="flex-1 lg:px-30vw md:px-20vw px-2vw flex flex-col items-center py-1vh overflow-y-scroll">
       <div className="w-full flex flex-col items-center justify-center">
         <img src="https://images8.alphacoders.com/712/712496.jpg" className="border border-black object-cover h-24 aspect-square rounded-full"/>
-        <p className="font-bold">{user.name}</p>
+        <p className="font-bold">{user.username}</p>
         <p className="smalltext pb-2vh">Hello there I am using Instagram</p>
       </div>
       <div className="flex items-start">
