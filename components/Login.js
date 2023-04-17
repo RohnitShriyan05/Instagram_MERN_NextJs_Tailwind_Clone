@@ -1,24 +1,94 @@
-import axios from "axios";
+import { FcGoogle } from "react-icons/fc";
+import Link from "next/link";
 import { useState } from "react";
-export default function login(){
-    const [registerPage, setRegisterPage] = useState(false);
-    const handleRegistration = ()=>{
-        
-    }
-    const handleSignIn = ()=>{
-
-    }
-    return(
-        <div className="h-screen w-full flex flex-col items-center justify-center text-center drop-shadow">
-            <p className="vbigtext logo">Instagram</p>
-            <p className="vsmalltext">By Rohnit Shriyan</p>
-            <form className="flex-col">
-                <input placeholder="Username" className="smalltext mt-3vh px-1 border rounded-sm"/><br/>
-                <input placeholder="Password" type="password" className="smalltext mt-1vh px-1 border rounded-sm"/><br/>
-                <input placeholder="Confirm password" type="password" className={registerPage? "smalltext w-max mt-1vh px-1 border rounded-sm":"hidden"}/>
-                <button onClick={registerPage? handleRegistration: handleSignIn} className="w-full bg-metablue text-white mt-1vh rounded-sm">{registerPage? "Register":"Sign In"}</button>
-            </form>
-            <button onClick={()=>setRegisterPage(!registerPage)} className="vsmalltext text-metablue pt-1vh">{registerPage? "Sign In":"Create new account"}</button>
-        </div>
-    );
+import { auth, provider } from "../firebase";
+import { signInWithCredential } from "firebase/auth";
+export function Login({setUser, setRegister}) {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const GoogleSignIn = (e) => {
+    e.preventDefault();
+    auth.onAuthStateChanged((firebaseUser) => {
+        if (firebaseUser) {
+          setUser({
+            name: firebaseUser.displayName,
+            email: firebaseUser.email,
+            profilepic: firebaseUser.photoURL,
+          });
+        } else {
+          auth
+            .signInWithPopup(provider)
+            .then((res) => {
+              setUser({
+                name: res.user.displayName,
+                email: res.user.email,
+                profilepic: res.user.photoURL,
+              });
+            })
+            .catch((error) => alert(error.message));
+        }
+      });
+  };
+  const UsernameSignIn = (e) => {
+    e.preventDefault();
+    signInWithCredential(auth, username, password)
+      .then((userCredential) => {
+        // Signed in
+        setUser({ userCredential });
+        console.log(user);
+      })
+      .catch((error) => {
+        alert("invalid username or password, please try again");
+      });
+  };
+  return (
+    <div className="h-screen w-full flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center py-4vh rounded-lg drop-shadow-2xl bg-white border border-neutral-200">
+        <h1 className="text-5xl pb-2 logo">Instagram</h1>
+        <form className="py-2vh px-2vw">
+          <div className="flex items-center flex-col w-full ">
+            <label className="text-sm pb-2 w-full font-semibold">
+              USERNAME<span className="text-red-600 text-xs">*</span>
+            </label>
+            <input
+              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              name="USERNAME"
+              className="bg-primaryDark w-full mx-3vw text-lg h-10 px-2 border border-neutral-400 rounded-md"
+            />
+          </div>
+          <div className="flex items-center flex-col w-full pt-1vh pb-2vh">
+            <label className="text-sm pb-2 w-full font-semibold">
+              PASSWORD<span className="text-red-600 text-xs">*</span>
+            </label>
+            <input
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              name="PASSWORD"
+              className="w-full mx-3vw text-lg h-10 px-2 border border-neutral-400 rounded-md"
+            />
+          </div>
+          <button
+            onClick={UsernameSignIn}
+            className="w-full h-10 bg-sky-500 text-white rounded-lg"
+          >
+            Sign In
+          </button>
+          <div className="text-xs py-2vh flex">
+            Dont have an account yet?{" "}
+            <button onClick={(e)=>{setRegister(false); e.preventDefault();}}>
+              <p className="text-sky-500 text-xs pl-1 cursor-pointer">Register</p>
+            </button>
+          </div>
+          <p className="w-full text-center text-sm py-2vh">OR</p>
+          <button
+            className="flex items-center w-full h-10 justify-center"
+            onClick={GoogleSignIn}
+          >
+            <FcGoogle className="mr-2 text-xl" /> Continue with Google
+          </button>
+        </form>
+      </div>
+    </div>
+  );
 }
